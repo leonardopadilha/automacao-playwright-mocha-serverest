@@ -1,0 +1,22 @@
+{
+  "name": "automacao-playwright-mocha-serverest-dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test  --headed",
+    "test:terminal": "npx playwright test",
+    "test:ui": "npx playwright test --ui",
+    "test:chromium": "npx playwright test --project=chromium",
+    "test:especific" : "npx playwright test example",
+    "test:debug": "npx playwright test --debug",
+    "test:codegen": "npx playwright codegen"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.47.2",
+    "@types/node": "^22.5.5"
+  }
+}
