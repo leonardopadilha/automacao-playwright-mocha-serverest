@@ -1,19 +1,26 @@
-const chai = require('chai')
-const chaiHttp = require('chai-http')
+const chai = require('chai');
+const { registerUser } = require('../../functions/signup/registerUser');
+const { form } = require('../../functions/login/login');
 
-chai.use(chaiHttp);
 const expect = chai.expect;
 
-const request = chai.request('https://front.serverest.dev');
+describe('Sign up', () => {
+    it('Register non-admin user successfully', async () => {
+        const user = {
+            nome: "Teste QA_1",
+            email: "testes11130@teste.com",
+            password: "qa123",
+            administrador: 'false'
+          }
 
-// Exemplo de teste
-describe('Testes de API', () => {
-    it('deve retornar 200 ao acessar a raiz', (done) => {
-        request
-            .get('/') // Método GET
-            .end((err, res) => {
-                expect(res).to.have.status(200);
-                done(); // Indica que o teste terminou
-            });
+         const response = await registerUser(user)
+         expect(response).to.has.status(201)
+         expect(response.body._id).to.be.not.empty
+         expect(response.body.message).to.eq("Cadastro realizado com sucesso")
+         
+         const login = await form(user)
+         expect(login).to.has.status(200)
+         expect(login.body.authorization).to.be.not.empty
+         expect(login.body.message).to.eq("Login realizado com sucesso")
     });
 });
