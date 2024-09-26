@@ -1,0 +1,14 @@
+{
+    "non_admin": {
+        "nome": "Teste QA",
+        "email": "user@user.com",
+        "password": "qa123",
+        "administrador": "false"
+      },
+      "admin": {
+        "nome": "Teste QA",
+        "email": "admin@admin.com",
+        "password": "qa123",
+        "administrador": "true"
+      }
+}

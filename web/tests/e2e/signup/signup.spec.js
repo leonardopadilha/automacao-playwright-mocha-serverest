@@ -1,10 +1,24 @@
-// @ts-check
-const { test, expect } = require('@playwright/test');
+const { test } = require('../../support')
+const data = require('../../support/fixtures/users/users.json')
 
-test('has title', async ({ page }) => {
-  await page.goto('/');
+test('Register non-admin user successfully', async ({ page, request }) => {  
+  const user = data.non_admin
 
-  // Expect a title "to contain" a substring.
-  const title = page.locator(".font-robot")
-  await expect(title).toHaveText("Loginn");
+  await page.signup.visit('/cadastrarusuarios');
+  await page.signup.register(user)
+  await page.signup.alertHaveText('Cadastro realizado com sucesso')
+  await page.login.isLoggedIn()
+
+  await request.api.deleteUser(user)
+});
+
+test('Register admin user successfully', async ({ page, request }) => {  
+  const user = data.admin
+
+  await page.signup.visit('/cadastrarusuarios');
+  await page.signup.register(user)
+  await page.signup.alertHaveText('Cadastro realizado com sucesso')
+  await page.login.isLoggedIn()
+
+  await request.api.deleteUser(user)
 });
