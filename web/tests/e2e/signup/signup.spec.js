@@ -3,6 +3,7 @@ const data = require('../../support/fixtures/users/users.json')
 
 test('Register non-admin user successfully', async ({ page, request }) => {  
   const user = data.non_admin
+  await request.api.deleteUser(user)
 
   await page.signup.visit('/cadastrarusuarios');
   await page.signup.register(user)
@@ -14,6 +15,7 @@ test('Register non-admin user successfully', async ({ page, request }) => {
 
 test('Register admin user successfully', async ({ page, request }) => {  
   const user = data.admin
+  await request.api.deleteUser(user)
 
   await page.signup.visit('/cadastrarusuarios');
   await page.signup.register(user)

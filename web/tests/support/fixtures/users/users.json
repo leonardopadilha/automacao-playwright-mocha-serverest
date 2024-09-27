@@ -10,5 +10,11 @@
         "email": "admin@admin.com",
         "password": "qa123",
         "administrador": "true"
+      },
+      "empty": {
+        "nome": "",
+        "email": "",
+        "password": "",
+        "administrador": ""
       }
 }
