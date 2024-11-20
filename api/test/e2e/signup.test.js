@@ -16,7 +16,6 @@ describe('Sign up', () => {
           }
     });
 
-
     it('Register non-admin user successfully', async () => {
          const response = await registerUser(user)
          expect(response).to.has.status(201)
