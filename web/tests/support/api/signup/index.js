@@ -26,4 +26,16 @@ export class Api {
             return userId
         }
     }
+    
+    async registerUser(user) {
+        const newUser = await this.request.post(`${this.baseApi}/usuarios`, {
+            data: {
+                nome: user.nome,
+                email: user.email,
+                password: user.password,
+                administrador: user.administrador
+            }
+        })
+        expect(await newUser.ok()).toBeTruthy()
+    }
 }

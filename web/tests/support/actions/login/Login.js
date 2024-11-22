@@ -30,4 +30,12 @@ export class Login {
         await expect(loggedUser).toBeVisible({ timeout: 7000 })
         await expect(loggedUser).toHaveText(`Logout`)
     }
+
+    async showProducts() {
+        const productTitle = await this.page.locator('.jumbotron h4')
+        await expect(productTitle).toHaveText('Produtos')
+
+        const productList = await this.page.locator('.container-fluid .espacamento')
+        await expect(productList).toBeVisible()
+    }
 }
