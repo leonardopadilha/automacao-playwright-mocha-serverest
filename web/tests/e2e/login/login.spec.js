@@ -26,3 +26,14 @@ test('login with user non-admin', async ({ request, page }) => {
   await page.login.showProducts()
   await request.api.deleteUser(user)
 })
+
+test('login with user admin', async ({ request, page }) => {
+  const user = data.admin
+  await request.api.deleteUser(user)
+  await request.api.registerUser(user)
+
+  await page.login.form(user)
+  await page.login.isLoggedIn()
+  await page.login.showToAdmin(user, 'Este é seu sistema para administrar seu ecommerce.')
+  await request.api.deleteUser(user)
+})

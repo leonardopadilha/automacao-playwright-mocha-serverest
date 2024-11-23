@@ -38,4 +38,15 @@ export class Login {
         const productList = await this.page.locator('.container-fluid .espacamento')
         await expect(productList).toBeVisible()
     }
+
+    async showToAdmin(user, text) {
+        const welcomeTitle = await this.page.locator('.jumbotron h1')
+        await expect(welcomeTitle).toHaveText(`Bem Vindo ${user.nome}`)
+
+        const rows = await this.page.locator('.jumbotron .row')
+        await expect(rows).toBeVisible()
+
+        const message = await this.page.locator('.lead')
+        await expect(message).toHaveText(text)
+    }
 }
