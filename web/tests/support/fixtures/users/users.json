@@ -16,5 +16,17 @@
         "email": "",
         "password": "",
         "administrador": ""
+      },
+      "wrong": {
+        "nome": "Teste QA",
+        "email": "wrong@wrong.com",
+        "password": "qa123",
+        "administrador": "true"
+      },
+      "email_already_registered": {
+        "nome": "Teste QA",
+        "email": "email_already@email.com",
+        "password": "qa123",
+        "administrador": "true"
       }
 }

@@ -37,3 +37,10 @@ test('login with user admin', async ({ request, page }) => {
   await page.login.showToAdmin(user, 'Este é seu sistema para administrar seu ecommerce.')
   await request.api.deleteUser(user)
 })
+
+test('login wrong', async ({ page }) => {
+  const user = data.wrong
+
+  await page.login.form(user)
+  await page.login.alertHaveText('Email e/ou senha inválidos')
+})
