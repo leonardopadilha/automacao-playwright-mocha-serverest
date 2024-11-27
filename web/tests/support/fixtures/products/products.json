@@ -4,5 +4,11 @@
     "preco": "425",
     "descricao": "Mouse",
     "quantidade": "389"
+  },
+  "empty": {
+    "nome": "",
+    "preco": "",
+    "descricao": "",
+    "quantidade": ""
   }
 }

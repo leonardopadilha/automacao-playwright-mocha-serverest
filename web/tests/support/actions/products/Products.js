@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const { expect } = require('@playwright/test')
 
 export class Products {
@@ -21,11 +23,13 @@ export class Products {
     await this.page.getByTestId('cadastarProdutos').click()
   }
 
-  async showProductList() {
-    await expect(this.page).toHaveURL("https://front.serverest.dev/admin/cadastrarprodutos");
+  async showProductList(product) {
+    await expect(this.page).toHaveURL(process.env.PRODUCT_LIST_URL);
 
-/*     const rows = await this.page.locator('.table-striped')
-    await expect(rows).toContainText(product.nome) */
+    //const rows = await this.page.locator(`//*[contains(text(),'${product.nome}')]`)
+    const rows = await this.page.locator('td', { hasText: product.nome})
+    await expect(rows).toBeVisible()
+    await expect(rows).toHaveText(product.nome)
   }
 }
 

@@ -7,7 +7,7 @@
       },
       "admin": {
         "nome": "Teste QA",
-        "email": "admin@admin.com",
+        "email": "adm@adm.com",
         "password": "qa123",
         "administrador": "true"
       },
