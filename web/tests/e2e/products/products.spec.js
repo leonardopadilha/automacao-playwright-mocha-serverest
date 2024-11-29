@@ -7,7 +7,27 @@ test.beforeEach(async ({ request, page }) => {
   await page.login.formHaveText('Login')
 })
 
-test.only('Insert new product through the link and without image', async ({ request, page }) => {
+test('Product without informations', async ({ request, page }) => {
+  const user = data.admin
+  await request.api.deleteUser(user)
+  await request.api.registerUser(user)
+  await page.login.form(user)
+  await page.login.isLoggedIn()
+
+  const product = buy.empty
+  await page.menu.clickOn('Cadastrar Produtos')
+  await page.products.productsScreen()
+  await page.products.form(product)
+  await page.products.submit()
+  await page.login.alertHaveText([
+    'Nome é obrigatório',
+    'Preco é obrigatório',
+    'Descricao é obrigatório',
+    'Quantidade é obrigatório'
+  ])
+})
+
+test('Insert new product through the link and without image', async ({ request, page }) => {
   const user = data.admin
   await request.api.deleteUser(user)
   await request.api.registerUser(user)
@@ -20,12 +40,5 @@ test.only('Insert new product through the link and without image', async ({ requ
   await page.products.form(product)
   await page.products.submit()
   await page.products.showProductList(product)
-
-  const requestProduct = await request.get(`https://serverest.dev/produtos?nome=${product.nome}`)
-  const bodyJson = await requestProduct.json()
-  const id = bodyJson.produtos[0]._id
-  const deleteProduct = await request.delete(`https://serverest.dev/produtos/${id}`)
-  const responseDelete = await deleteProduct.json()
-  console.log("Delete test" + JSON.stringify(responseDelete))
-  //expect(deleteProduct.ok()).toBeTruthy()
+  await page.products.deleteProduct(product)
 })
