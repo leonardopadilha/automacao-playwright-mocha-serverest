@@ -2,13 +2,13 @@ const { test } = require('../../support')
 const data = require('../../support/fixtures/users/users.json')
 const buy = require('../../support/fixtures/products/products.json')
 
-test.beforeEach(async ({ request, page }) => {
+test.beforeEach(async ({ page }) => {
   await page.login.visit('/login')
   await page.login.formHaveText('Login')
 })
 
 test('Product without informations', async ({ request, page }) => {
-  const user = data.admin
+  const user = data.admin_product_empty
   await request.api.deleteUser(user)
   await request.api.registerUser(user)
   await page.login.form(user)
@@ -28,7 +28,7 @@ test('Product without informations', async ({ request, page }) => {
 })
 
 test('Insert new product through the link and without image', async ({ request, page }) => {
-  const user = data.admin
+  const user = data.admin_without_image
   await request.api.deleteUser(user)
   await request.api.registerUser(user)
   await page.login.form(user)

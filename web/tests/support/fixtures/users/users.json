@@ -11,6 +11,24 @@
         "password": "qa123",
         "administrador": "true"
       },
+      "admin_with_image": {
+        "nome": "Teste QA",
+        "email": "adm@adm.com",
+        "password": "qa123",
+        "administrador": "true"
+      },
+      "admin_without_image": {
+        "nome": "Teste QA",
+        "email": "adm@adm.com",
+        "password": "qa123",
+        "administrador": "true"
+      },
+      "admin_product_empty": {
+        "nome": "Teste QA",
+        "email": "adm@adm.com",
+        "password": "qa123",
+        "administrador": "true"
+      },
       "empty": {
         "nome": "",
         "email": "",

@@ -33,9 +33,10 @@ export class Products {
   }
 
   async deleteProduct(product) {
-    const rows = await this.page.locator('td', { hasText: product.nome})
-
     await this.page.locator(`//td[contains(text(), "${product.nome}")]/parent::tr//button[contains(text(), "Excluir")]`).click()
+
+    await this.page.waitForLoadState('networkidle')
+    const rows = await this.page.locator('td', { hasText: product.nome})
     await expect(rows).not.toBeVisible()
   }
 }
