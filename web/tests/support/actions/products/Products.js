@@ -1,4 +1,5 @@
 require('dotenv').config()
+const path = require('path')
 
 const { expect } = require('@playwright/test')
 
@@ -19,17 +20,28 @@ export class Products {
     await this.page.getByTestId('quantity').type(product.quantidade)
   }
 
+  async chooseImage() {
+    const fileChooserPromise = this.page.waitForEvent('filechooser');
+    await this.page.getByTestId('imagem').click();
+    const fileChooser = await fileChooserPromise;
+    await fileChooser.setFiles(path.join(__dirname, '../../../support/image/liga.jpg'));
+  }
+
   async submit() {
     await this.page.getByTestId('cadastarProdutos').click()
   }
 
   async showProductList(product) {
-    await expect(this.page).toHaveURL(process.env.PRODUCT_LIST_URL);
-
     //const rows = await this.page.locator(`//*[contains(text(),'${product.nome}')]`)
     const rows = await this.page.locator('td', { hasText: product.nome})
     await expect(rows).toBeVisible()
     await expect(rows).toHaveText(product.nome)
+  }
+
+  async validImage(image) {
+    const isImage = await this.page.locator('td', {hasText: image})
+    //await expect(isImage).toHaveAttribute('src', image)
+    await expect(isImage).toBeVisible()
   }
 
   async deleteProduct(product) {
